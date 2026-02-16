@@ -1,15 +1,152 @@
 /*Arrays Methodes in JavaScript */
-
-
-
-/*##### ES6 (ES2015) #####*/
-
 let items = [];
 const obj = {
     a: 1,
     b: 2,
     c: 3
 };
+
+
+/*##### Pre-ES6 #####*/
+
+/* A. Mutator Methods (modify the original array) */
+// 1. push() - Add to end
+
+items = [1, 2];
+items.push(3, 4);     // returns new length: 4
+console.log(items);  // [1,2,3,4]
+
+// 2. pop() - Remove from end
+
+items.pop();
+console.log(items); // returns [ 1, 2, 3 ]
+
+// 3. unshift() - Add to beginning
+
+items.unshift(0);
+console.log(items) // returns [ 0, 1, 2, 3 ]
+
+// 4. shift() - Remove from beginning
+
+items.shift()
+console.log(items) // returns [1, 2, 3 ]
+
+// 5. splice() - Add / remove anywhere(the Swiss Army knife)
+
+items = [1, 2, 3, 4, 5];
+// Remove 2 elements starting at index 1
+
+console.log(items.splice(1, 2)); // returns [2, 3]
+console.log(items) // returns [1, 4, 5]
+
+// Insert without removing
+items.splice(1, 0, 'a', 'b'); // returns []
+console.log(items) // returns [ 1, 'a', 'b', 4, 5 ]
+
+
+// Replace
+items.splice(2, 1, 'x');      // returns ['b']
+console.log(items);           // [1,'a','x',4,5]
+
+
+// 6. reverse() - Reverse order
+
+items = [1, 2, 3];
+items.reverse();       // returns [3,2,1]
+console.log(items);    // [3,2,1] (original modified!)
+
+// 7. sort() - Sort elements
+items = [3, 1, 4, '20', 10];
+items.sort((a, b) => a - b);         // returns [ 1, 3, 4, 10, '20' ]
+items.sort((a, b) => b - a);         // returns [ '20', 10, 4, 3, 1 ]
+// console.log(items);    
+
+const students = [
+    { name: "Jane", age: 16 },
+    { name: "Mark", age: 19 },
+    { name: "Kent", age: 14 },
+];
+
+// Sort by age in ascending order
+students.sort((a, b) => a.age - b.age);
+
+console.log(students) // Returned Result: [{ name: "Kent", age: 14 }, { name: "Jane", age: 16 }, { name: "Mark", age: 19 }]
+
+/* B. Accessor Methods (return new array, don't modify original) */
+
+// 1. concat() - Merge arrays
+
+const arr1 = [1, 2];
+const arr2 = [3, 4];
+arr1.concat(arr2);        // returns [1,2,3,4]
+arr1.concat(5, 6);         // returns [1,2,5,6]
+arr1.concat([7, 8], 9);    // returns [1,2,7,8,9]
+console.log(arr1);        // still [1,2] (unchanged)
+
+// 2. slice() - Extract portion
+console.log('=+=+ Slice +=+=')
+
+items = [1, 2, 3, 4, 5];
+console.log(items.slice(1, 3));      // returns [2,3] (index 1 to 3-1)
+console.log(items.slice(2));        // returns [3,4,5] (from index 2 to end)
+console.log(items.slice(-2));       // returns [4,5] (last 2)
+console.log(items.slice());         // returns [1,2,3,4,5] (shallow copy)
+
+console.log(items)
+
+
+// 3. join() - Create string from array
+
+items = ['Hello', 'World'];
+console.log(items.join());          // 'Hello,World'
+console.log(items.join(' '));       // 'Hello World'
+console.log(items.join('-'));       // 'Hello-World'
+
+// 4. toLocaleString() - Locale - specific string
+
+const date = [new Date()];
+console.log(date.toLocaleString('en-US')); // US format     2/16/2026, 10:29:44 PM
+console.log(date.toLocaleString('de-DE')); // German format 16.2.2026, 22:29:44
+console.log(date.toLocaleString('fr-FR')); // France format 16/02/2026 22:29:44
+
+// 4. map() - Transform each element
+
+items = [1, 2, 3, 4, 5];
+console.log(items.map(x => 'a' + x)); // [ 'a1', 'a2', 'a3', 'a4', 'a5' ]
+
+// 5. filter() - Keep elements that pass test
+
+items = [1, 2, 3, 4, 5];
+console.log("OddscNumbers: ", items.filter(x => x % 2 !== 0)) // OddscNumbers:  [ 1, 3, 5 ]
+
+// 6. every() - Check if ALL elements pass test
+items = [10, 20, 30, 40, 50];
+console.log(items.every(x => x % 2 == 0)); // True All elements are Even Numbers
+
+// 7. some() - Check if AT LEAST ONE passes test
+
+let result = items.some(x => x > 20);  // true
+console.log(result);
+result = items.some(x => x > 500);  // false
+console.log(result);
+
+// 8.reduce() - Accumulate values
+
+
+const sum = items.reduce((accumulator, current) => {
+    return accumulator + current;
+}, 0);
+console.log(sum) // result: 150
+
+// 9. reduceRight() - Reduce from right to left
+
+items = [[1], [2], [3]];
+result = items.reduceRight((acc, curr) => acc.concat(curr));
+console.log(result); // [ 3, 2, 1 ]
+
+/*##### ES6 (ES2015) #####*/
+
+
 
 // 1. Array.from() : Creates arrays from array-like or iterable objects.
 
